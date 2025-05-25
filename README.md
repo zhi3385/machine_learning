@@ -40,3 +40,26 @@ Step3: verify PyTorch is working with GPU support
 * Step1: Start ollama + webui bundle container following https://github.com/open-webui/open-webui?tab=readme-ov-file#installing-open-webui-with-bundled-ollama-support
 
 * Step2: open https://ollama.com/search to find models, open webui http://localhost:3000 and pull the model from ollama, start chat, while chatbot is running, use nvidia-smi to monitor GPU load.
+
+## run jupyterlab inside the docker container
+
+1. when start docker container, add port forward
+   
+       sudo docker run -it -p 8888:8888 --gpus=all --rm pytorch/pytorch:2.7.0-cuda12.8-cudnn9-runtime bash
+
+2. install jupyterlab in the container
+   
+       pip3 install jupyterlab
+       
+3. set jupyterlab password so it can be accessed remotely 
+
+       jupyter lab password
+
+4. start jupyterlab binding 0.0.0.0
+
+       jupyter lab --allow-root --ip 0.0.0.0
+
+5. access from host machine
+
+       http://localhost:8888/lab
+   
