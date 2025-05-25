@@ -11,7 +11,7 @@ OS: Ubuntu 24.04 LTS
 
 * Step2: Install docker following https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
-* Step3: Install the NVIDIA Container Toolkit
+* Step3: Install the NVIDIA Container Toolkit https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#with-apt-ubuntu-debian and config it https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#configuring-docker
 
 until here, the machine learning environment with GPU support has setup, we can run ollama or other framework like tensorflow or PyTorch
 
@@ -19,3 +19,4 @@ until here, the machine learning environment with GPU support has setup, we can 
 
 * Step5: open https://ollama.com/search to find models, open webui http://localhost:3000 and pull the model from ollama, start chat, while chatbot is running, use nvidia-smi to monitor GPU load.
 
+to start a pytorch docker, find the tags match the Cuda version from the driver https://hub.docker.com/r/pytorch/pytorch/tags 
