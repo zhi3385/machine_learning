@@ -17,17 +17,23 @@ now, the machine learning environment with GPU support has setup, we can run doc
 
 ## run PyTorch docker container with GPU support
 
-* Step1: Find the PyTorch tag match the Cuda version from the driver
+Step1: Find the PyTorch tag match the Cuda version from the driver
        run nvidai-smi to check the driver's cuda version
        find the tag match the version from https://hub.docker.com/r/pytorch/pytorch/tags 
 
-* Step2: start the docker container with --gpus=all option
+Step2: start the docker container with --gpus=all option
+
        sudo docker run -it --gpus=all --rm pytorch/pytorch:2.7.0-cuda12.8-cudnn9-runtime bash
 
-* Step3: verify PyTorch is working with GPU support
+Step3: verify PyTorch is working with GPU support
        in the commandline opened in step2, run below command
-       # echo -e 'import torch \nprint("GPU count:", torch.cuda.device_count())'|python3
-       expect output like: "GPU count: 2"
+
+
+       echo -e 'import torch \nprint("GPU count:", torch.cuda.device_count())'|python3
+
+  
+  
+  expect output like: "GPU count: 2"
 
 ## run chatbot with ollama + open WebUI 
 
