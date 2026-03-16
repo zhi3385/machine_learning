@@ -90,7 +90,7 @@ sudo docker run -d \
   -e CUDA_DEVICE_ORDER="PCI_BUS_ID" \
   -e CUDA_VISIBLE_DEVICES="0" \
   pytorch/pytorch:2.10.0-cuda13.0-cudnn9-runtime \
-  /bin/bash -c "pip install jupyterlab yfinance && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+  /bin/bash -c "pip install jupyterlab --break-system-packages && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
 
 echo "Wait 30 seconds for installation, then access at http://localhost:8080"
 ```
