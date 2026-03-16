@@ -74,8 +74,11 @@ or all in one:
 ```
 #!/bin/bash
 
-# Define the container name
+# Define variables
 NAME="pytorch-jupyter"
+PORT="8888"
+DOCKER_IMAGE="pytorch/pytorch:2.10.0-cuda13.0-cudnn9-runtime"
+TOKEN="1234" 
 
 # Remove existing container if it exists
 sudo docker rm -f $NAME 2>/dev/null
@@ -85,14 +88,25 @@ sudo docker run -d \
   --name $NAME \
   --gpus all \
   --restart always \
-  -p 8080:8888 \
+  -p $PORT:$PORT \
   -v pytorch:/root/.pytorch \
   -e CUDA_DEVICE_ORDER="PCI_BUS_ID" \
   -e CUDA_VISIBLE_DEVICES="0" \
-  pytorch/pytorch:2.10.0-cuda13.0-cudnn9-runtime \
-  /bin/bash -c "pip install jupyterlab --break-system-packages && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+  $DOCKER_IMAGE \
+  /bin/bash -c "pip install jupyterlab --break-system-packages && \
+  jupyter lab --ip=0.0.0.0 --port=$PORT --no-browser --allow-root --NotebookApp.token='$TOKEN'"
 
-echo "Wait 30 seconds for installation, then access at http://localhost:8080"
+echo "------------------------------------------------"
+echo "Container starting..."
+echo "Wait ~20s for JupyterLab to install."
+echo "Access at: http://localhost:$PORT"
+echo "Login Token: $TOKEN"
+echo "------------------------------------------------"
+
+# Running below to verify GPU is enabled 
+sudo docker exec -it pytorch-jupyter nvidia-smi
 ```
+
+
 
    
