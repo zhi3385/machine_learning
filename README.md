@@ -39,7 +39,7 @@ Step3: verify PyTorch is working with GPU support
 
 * Step1: Start ollama, priotize RTX 5060 Ti 16GB
   
-       sudo docker run -d --gpus all   -e CUDA_DEVICE_ORDER="PCI_BUS_ID"   -e CUDA_VISIBLE_DEVICES="0,1"   -e OLLAMA_SCHED_SPREAD=0   -v ollama:/root/.ollama   -p 11434:11434   --name ollama   --restart always   ollama/ollama:latest
+       sudo docker run -d --gpus all   -e CUDA_DEVICE_ORDER="PCI_BUS_ID"   -e CUDA_VISIBLE_DEVICES="0,1"   -e OLLAMA_SCHED_SPREAD=0   -v ollama:/root/.ollama   -p 11434:11434   --name ollama   ollama/ollama:latest
 
 * Step2: install Open WebUI, ref https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-with-default-configuration
 
@@ -87,7 +87,6 @@ sudo docker rm -f $NAME 2>/dev/null
 sudo docker run -d \
   --name $NAME \
   --gpus all \
-  --restart always \
   -p $PORT:$PORT \
   -v pytorch:/root/.pytorch \
   -e CUDA_DEVICE_ORDER="PCI_BUS_ID" \
